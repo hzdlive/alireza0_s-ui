@@ -21,8 +21,8 @@ jobs:
       uses: docker/metadata-action@v5
       with:
         images: |
-          alireza7/s-ui-singbox
-          ghcr.io/alireza0/s-ui-singbox
+          hzdlive/s-ui-singbox
+          ghcr.io/hzdlive/s-ui-singbox
         tags: |
           type=sha
           type=pep440,pattern=${{ steps.get_release.outputs.latest_release }}
