@@ -32,7 +32,7 @@
 - Panel Path: /app/
 - Subscription Port: 2096
 - Subscription Path: /sub/
-- User/Passowrd: admin
+- User/Password: admin
 
 ## Install & Upgrade to Latest Version
 
@@ -45,12 +45,24 @@ bash <(curl -Ls https://raw.githubusercontent.com/alireza0/s-ui/master/install.s
 **Step 1:** To install your desired legacy version, add the version to the end of the installation command. e.g., ver `1.0.0`:
 
 ```sh
-bash <(curl -Ls https://raw.githubusercontent.com/alireza0/s-ui/master/install.sh) 1.0.0
+VERSION=1.0.0 && bash <(curl -Ls https://raw.githubusercontent.com/alireza0/s-ui/$VERSION/install.sh) $VERSION
 ```
+
+## Manual installation
+
+1. Get the latest version of S-UI based on your OS/Architecture from GitHub: [https://github.com/alireza0/s-ui/releases/latest](https://github.com/alireza0/s-ui/releases/latest)
+2. **OPTIONAL** Get the latest version of `s-ui.sh` [https://raw.githubusercontent.com/alireza0/s-ui/master/s-ui.sh](https://raw.githubusercontent.com/alireza0/s-ui/master/s-ui.sh)
+3. **OPTIONAL** Copy `s-ui.sh` to /usr/bin/ and run `chmod +x /usr/bin/s-ui`.
+4. Extract s-ui tar.gz file to a directory of your choice and navigate to the directory where you extracted the tar.gz file.
+5. Copy *.service files to /etc/systemd/system/ and run `systemctl daemon-reload`.
+6. Enable autostart and start S-UI service using `systemctl enable s-ui --now`
+7. Start sing-box service using `systemctl enable sing-box --now`
 
 ## Uninstall S-UI
 
 ```sh
+sudo -i
+
 systemctl disable sing-box --now
 systemctl disable s-ui  --now
 
@@ -59,6 +71,8 @@ rm -f /etc/systemd/system/sing-box.service
 systemctl daemon-reload
 
 rm -fr /usr/local/s-ui
+rm /usr/bin/s-ui
+
 ```
 
 ## Install using Docker
@@ -118,7 +132,7 @@ docker build -t s-ui .
 
 Frontend codes are in `frontend` folder in the root of repository.
 
-To run it localy for instant developement you can use (apply automatic changes on file save):
+To run it locally for instant development you can use (apply automatic changes on file save):
 ```shell
 cd frontend
 npm run dev
